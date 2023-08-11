@@ -44,17 +44,32 @@ captureButton.addEventListener("click", () => {
   canvas.height = videoContainer.offsetHeight;
 
   const context = canvas.getContext("2d");
+  // context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  // Flip the context horizontally to match the video
+  context.scale(-1, 1);
+  context.translate(-canvas.width, 0);
   context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
+  // Reset the transformation to draw the watermark correctly
+  context.setTransform(1, 0, 0, 1, 0, 0);
+
+  // Flip the context horizontally again for the watermark
+  context.scale(-1, 1);
+  context.translate(-canvas.width, 0);
+
   // Get the size of the watermark
-  const watermarkWidth = watermark.naturalWidth;
-  const watermarkHeight = watermark.naturalHeight;
+  const watermarkWidth = 320;
+  const watermarkHeight = (watermark.naturalHeight * watermarkWidth) / watermark.naturalWidth;
 
   // Calculate the position of the watermark
   const watermarkX = (canvas.width - watermarkWidth) / 2;
-  const watermarkY = canvas.height * 0.75; // 60% down from the top
+  const watermarkY = (canvas.height * 0.75 - watermarkHeight / 2) + 20; // 60% down from the top
 
-  context.drawImage(watermark, watermarkX, watermarkY);
+  context.scale(-1, 1);
+  context.translate(-canvas.width, 0);
+
+  context.drawImage(watermark, watermarkX, watermarkY, watermarkWidth, watermarkHeight);
 
   // Hide the video and capture button, and show the preview and the retake and upload buttons
   webcamContainer.style.display = "none";

@@ -161,7 +161,9 @@ small,
 #watermark {
   position: absolute;
   top: 75%;
-  right: 40%;
+  right: 50%;
+  transform: translate(50%,0);
+  width: 320px;
   /* opacity: .75; */
 }
 
