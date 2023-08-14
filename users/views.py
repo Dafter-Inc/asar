@@ -33,14 +33,13 @@ def create_user():
 
         try:
             db.session.add(user)
+            db.session.commit()
 
         except Exception as e:
             flash("Passwords much be at least 8 characters.", "error")
             return redirect(url_for("users.create_user"))
 
-        else:
-            db.session.commit()
-            return redirect(url_for("users.login"))
+        return redirect(url_for("users.login"))
 
     return render_template("admin/create.html")
 
