@@ -3,12 +3,16 @@ from models.users import User
 from flask_login import login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import current_user
 
 bp = Blueprint("users", __name__)
 
 
 @bp.route("/admin/create_user/", methods=["GET", "POST"])
 def create_user():
+    if not current_user.is_authenticated:
+        flash("You must be logged in to access this page.", "error")
+        return redirect(url_for("users.login"))
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")

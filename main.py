@@ -19,6 +19,7 @@ from extensions import db, migrate, login_manager, superuser
 
 from models.users import User
 from models.images import Image
+from werkzeug.security import generate_password_hash
 
 load_dotenv()
 
@@ -66,3 +67,15 @@ if __name__ == "__main__":
     app = create_app(config_class=Config)
 
     app.run(debug=True if os.getenv("MODE") == "development" else False)
+
+# Check if the default admin user exists
+with app.app_context():
+    default_admin = User.query.filter_by(username=app.config['DEFAULT_ADMIN_USERNAME']).first()
+    if not default_admin:
+        # Create the default admin user
+        default_admin = User(
+            username=app.config['DEFAULT_ADMIN_USERNAME'],
+            password=generate_password_hash(app.config['DEFAULT_ADMIN_PASSWORD'], method='sha256'),
+        )
+        db.session.add(default_admin)
+        db.session.commit()
