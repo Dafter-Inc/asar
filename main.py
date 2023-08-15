@@ -35,6 +35,21 @@ class AdminModelView(ModelView):
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for("users.login", next=request.url))
+    
+def create_default_admin(app):
+    with app.app_context():
+        default_admin = User.query.filter_by(username=app.config['DEFAULT_ADMIN_USERNAME']).first()
+        if not default_admin:
+            print("Creating default admin user...")
+            default_admin = User(
+                username=app.config['DEFAULT_ADMIN_USERNAME'],
+                password=generate_password_hash(app.config['DEFAULT_ADMIN_PASSWORD'], method='sha256'),
+            )
+            db.session.add(default_admin)
+            db.session.commit()
+            print("Default admin user created successfully.")
+        else:
+            print("Default admin user already exists.")
 
 
 def create_app(config_class):
@@ -64,30 +79,11 @@ def create_app(config_class):
     @login_manager.user_loader
     def load_user(user_id):
         return db.session.get(User, user_id)
+    
+    create_default_admin(app)  
 
     return app
 
 
 if __name__ == "__main__":
     app = create_app(config_class=Config)
-    print(app.config['SQLALCHEMY_DATABASE_URI'])
-
-
-    # Check if the default admin user exists
-    with app.app_context():
-        default_admin = User.query.filter_by(username=app.config['DEFAULT_ADMIN_USERNAME']).first()
-        if not default_admin:
-            # Create the default admin user
-            print("Creating default admin user...")
-            default_admin = User(
-                username=app.config['DEFAULT_ADMIN_USERNAME'],
-                password=generate_password_hash(app.config['DEFAULT_ADMIN_PASSWORD'], method='sha256'),
-            )
-            db.session.add(default_admin)
-            db.session.commit()
-            print("Default admin user created successfully.")
-
-        else:
-            print("Default admin user already exists.")
-    
-    app.run(debug=True if os.getenv("MODE") == "development" else False)
