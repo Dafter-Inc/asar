@@ -4,14 +4,14 @@
 
 {% block body %}
 
-<div class="container-fluid">
+<div class="container-fluid text-center">
   <br />
   <h3 class="text-center">Welcome to the admin page.</h3>
   <br />
   {% if current_user.is_authenticated %}
   <!--  -->
   <h4 class="text-center">Logged in as: {{ current_user.username }}!</h4>
-  <a class="btn primary-btn bg-primary btn-lg text-center" href="{{ url_for('camera.images') }}">Approve/Disapprove Images</a>
+  <a class="btn primary-btn bg-primary btn-lg m-5" href="{{ url_for('camera.images') }}">Approve/Disapprove Images</a>
   <br />
   <h4 class="text-center">
     <a href="{{ url_for('users.logout') }}"><ins>logout</ins></a>
