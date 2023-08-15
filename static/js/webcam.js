@@ -23,7 +23,7 @@ const cameraAccessButton = document.getElementById("camera-access-btn");
 
 const setupCamera = async () => {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { aspectRatio: 9 / 16 } });
     video.srcObject = stream;
     cameraAccessButton.style.display = "none"; // Hide the button if access is allowed
   } catch (error) {
@@ -40,16 +40,21 @@ if (video) {
 }
 
 captureButton.addEventListener("click", () => {
+  const aspectRatio = 9 / 16;
   canvas.width = videoContainer.offsetWidth;
-  canvas.height = videoContainer.offsetHeight;
+  canvas.height = canvas.width * aspectRatio;
 
   const context = canvas.getContext("2d");
-  // context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  // Center the video feed on the canvas
+  const videoWidth = video.videoWidth * (canvas.height / video.videoHeight);
+  const videoHeight = canvas.height;
+  const videoX = (canvas.width - videoWidth) / 2;
 
   // Flip the context horizontally to match the video
   context.scale(-1, 1);
   context.translate(-canvas.width, 0);
-  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  context.drawImage(video, videoX, 0, videoWidth, videoHeight);
 
   // Reset the transformation to draw the watermark correctly
   context.setTransform(1, 0, 0, 1, 0, 0);

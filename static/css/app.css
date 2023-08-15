@@ -143,14 +143,17 @@ small,
 #video,
 #canvas {
   transform: scaleX(-1);
-  width: 394px;
-  height: 700px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9/16;
+  object-fit: cover;
 }
 
 .view-box {
   position: relative;
-  width: 640px;
-  height: 480px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9/16; 
 }
 
 #video {
