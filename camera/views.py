@@ -93,8 +93,8 @@ def image_actions():
     return jsonify({"message": "Action performed successfully"})
 
 
-@login_required
 @bp.route("/images/", methods=["GET"])
+@login_required
 def images():
     all_images = Image.query.all()
 

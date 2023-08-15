@@ -78,7 +78,7 @@ def create_app(config_class):
 
     @login_manager.user_loader
     def load_user(user_id):
-        return User.query.get(int(user_id))
+        return db.session.get(User, user_id)
     
     create_default_admin(app)  
 
