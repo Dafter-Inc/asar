@@ -149,7 +149,7 @@ small,
 #video,
 #canvas {
   transform: scaleX(-1);
-  width: 360px;
+  max-width: 100%;
   height: auto;
   aspect-ratio: 9/16;
   object-fit: cover;
