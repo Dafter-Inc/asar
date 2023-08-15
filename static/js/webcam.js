@@ -23,7 +23,11 @@ const cameraAccessButton = document.getElementById("camera-access-btn");
 
 const setupCamera = async () => {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: { aspectRatio: 9 / 16 } });
+    const stream = await navigator.mediaDevices.getUserMedia({ video: {
+      aspectRatio: 9 / 16,
+      width: { ideal: 360 }, // Set the ideal width to match the fixed width of the canvas
+      height: { ideal: 640 } // Set the ideal height based on 9:16 ratio
+    } });
     video.srcObject = stream;
     cameraAccessButton.style.display = "none"; // Hide the button if access is allowed
   } catch (error) {
