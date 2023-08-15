@@ -87,7 +87,7 @@ captureButton.addEventListener("click", () => {
 
   // Calculate the position of the watermark
   const watermarkX = (canvas.width - watermarkWidth) / 2;
-  const watermarkY = (canvas.height * 0.75 - watermarkHeight / 2) + 20; // 60% down from the top
+  const watermarkY = (canvas.height * 0.85 - watermarkHeight / 2) + 20; // 60% down from the top
 
   context.scale(-1, 1);
   context.translate(-canvas.width, 0);

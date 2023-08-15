@@ -169,7 +169,7 @@ small,
 
 #watermark {
   position: absolute;
-  top: 75%;
+  top: 85%;
   right: 50%;
   transform: translate(50%,0);
   width: 320px;
