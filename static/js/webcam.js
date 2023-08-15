@@ -41,20 +41,23 @@ if (video) {
 
 captureButton.addEventListener("click", () => {
   const aspectRatio = 9 / 16;
-  canvas.width = video.videoWidth;
-  canvas.height = canvas.width * aspectRatio;
+  const fixedWidth = 360;
+  const fixedHeight = fixedWidth * aspectRatio
+
+  canvas.width = fixedWidth;
+  canvas.height = fixedHeight;
 
   const context = canvas.getContext("2d");
 
   // Center the video feed on the canvas
-  const videoWidth = video.videoWidth;
-  const videoHeight = canvas.height;
-  const videoX = (canvas.width - videoWidth) / 2;
+  // const videoWidth = video.videoWidth;
+  // cont videoHeight = canvas.height;
+  // const videoX = (canvas.width - videoWidth) / 2;
 
   // Flip the context horizontally to match the video
   context.scale(-1, 1);
   context.translate(-canvas.width, 0);
-  context.drawImage(video, videoX, 0, videoWidth, videoHeight);
+  context.drawImage(video, 0, 0, fixedWidth, fixedHeight);
 
   // Reset the transformation to draw the watermark correctly
   context.setTransform(1, 0, 0, 1, 0, 0);
