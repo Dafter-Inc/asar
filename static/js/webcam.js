@@ -41,13 +41,13 @@ if (video) {
 
 captureButton.addEventListener("click", () => {
   const aspectRatio = 9 / 16;
-  canvas.width = videoContainer.offsetWidth;
+  canvas.width = video.videoWidth;
   canvas.height = canvas.width * aspectRatio;
 
   const context = canvas.getContext("2d");
 
   // Center the video feed on the canvas
-  const videoWidth = video.videoWidth * (canvas.height / video.videoHeight);
+  const videoWidth = video.videoWidth;
   const videoHeight = canvas.height;
   const videoX = (canvas.width - videoWidth) / 2;
 
