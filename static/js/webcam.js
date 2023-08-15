@@ -40,22 +40,35 @@ if (video) {
 }
 
 captureButton.addEventListener("click", () => {
-  const fixedWidth = 360;
-  const fixedHeight = (fixedWidth * 16)/9;
+  const fixedWidth = 360; // Fixed width
+  const fixedHeight = (fixedWidth * 16) / 9; // Calculating height based on 9:16 ratio
 
   canvas.width = fixedWidth;
   canvas.height = fixedHeight;
 
   const context = canvas.getContext("2d");
 
-  const scale = fixedWidth / video.videoWidth;
-  const videoWidth = fixedWidth;
-  const videoHeight = video.videoHeight * scale;
+  // Calculate the dimensions for drawing the video on the canvas
+  const videoAspectRatio = video.videoWidth / video.videoHeight;
+  const canvasAspectRatio = fixedWidth / fixedHeight;
+  let videoWidth, videoHeight, videoX, videoY;
 
-  // Flip the context horizontally to match the video
+  if (videoAspectRatio > canvasAspectRatio) {
+    videoWidth = video.videoWidth * (fixedHeight / video.videoHeight);
+    videoHeight = fixedHeight;
+    videoX = (fixedWidth - videoWidth) / 2;
+    videoY = 0;
+  } else {
+    videoWidth = fixedWidth;
+    videoHeight = video.videoHeight * (fixedWidth / video.videoWidth);
+    videoX = 0;
+    videoY = (fixedHeight - videoHeight) / 2;
+  }
+
+  // Draw the visible portion of the video on the canvas
   context.scale(-1, 1);
   context.translate(-canvas.width, 0);
-  context.drawImage(video, 0, (fixedHeight - videoHeight) / 2, videoWidth, videoHeight);
+  context.drawImage(video, videoX, videoY, videoWidth, videoHeight);
 
   // Reset the transformation to draw the watermark correctly
   context.setTransform(1, 0, 0, 1, 0, 0);
