@@ -46,6 +46,9 @@ def create_user():
 
 @bp.route("/admin/login/", methods=["GET", "POST"])
 def login():
+    if not current_user.is_authenticated and request.path == "/admin/":
+        return redirect(url_for("users.login"))
+    
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
