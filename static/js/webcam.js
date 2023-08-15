@@ -42,7 +42,7 @@ if (video) {
 captureButton.addEventListener("click", () => {
   const aspectRatio = 9 / 16;
   const fixedWidth = 360;
-  const fixedHeight = fixedWidth * aspectRatio
+  const fixedHeight = (fixedWidth * 16)/9;
 
   canvas.width = fixedWidth;
   canvas.height = fixedHeight;
@@ -50,9 +50,9 @@ captureButton.addEventListener("click", () => {
   const context = canvas.getContext("2d");
 
   // Center the video feed on the canvas
-  // const videoWidth = video.videoWidth;
-  // cont videoHeight = canvas.height;
-  // const videoX = (canvas.width - videoWidth) / 2;
+  const videoWidth = video.videoWidth;
+  const videoHeight = (video.videoWidth * 16) / 9;
+  const videoY = (video.videoHeight - videoHeight) / 2;
 
   // Flip the context horizontally to match the video
   context.scale(-1, 1);
