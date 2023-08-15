@@ -78,11 +78,16 @@ if __name__ == "__main__":
         default_admin = User.query.filter_by(username=app.config['DEFAULT_ADMIN_USERNAME']).first()
         if not default_admin:
             # Create the default admin user
+            print("Creating default admin user...")
             default_admin = User(
                 username=app.config['DEFAULT_ADMIN_USERNAME'],
                 password=generate_password_hash(app.config['DEFAULT_ADMIN_PASSWORD'], method='sha256'),
             )
             db.session.add(default_admin)
             db.session.commit()
+            print("Default admin user created successfully.")
+
+        else:
+            print("Default admin user already exists.")
     
     app.run(debug=True if os.getenv("MODE") == "development" else False)
