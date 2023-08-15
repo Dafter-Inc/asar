@@ -69,6 +69,10 @@ def create_app(config_class):
     login_manager.init_app(app)
     superuser.init_app(app)
 
+    # Create the tables
+    with app.app_context():
+        db.create_all()
+
     # admin configuration
 
     superuser.add_view(AdminModelView(User, db.session))
