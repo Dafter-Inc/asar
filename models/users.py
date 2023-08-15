@@ -1,5 +1,5 @@
 from extensions import db
-
+from werkzeug.security import generate_password_hash
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,3 +26,6 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
+    
+    def set_password(self, password):
+        self.password = generate_password_hash(password, method='sha256')

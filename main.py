@@ -27,6 +27,11 @@ load_dotenv()
 class AdminModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
+    
+    def on_model_change(self, form, model, is_created):
+        if form.password.data:
+            model.password = generate_password_hash(form.password.data, method='sha256')
+        return super(AdminModelView, self).on_model_change(form, model, is_created)
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for("users.login", next=request.url))
@@ -65,6 +70,8 @@ def create_app(config_class):
 
 if __name__ == "__main__":
     app = create_app(config_class=Config)
+    print(app.config['SQLALCHEMY_DATABASE_URI'])
+
 
     # Check if the default admin user exists
     with app.app_context():
