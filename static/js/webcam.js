@@ -42,7 +42,9 @@ const setupCamera = async () => {
 if (video) {
   setupCamera();
 }
-
+cameraAccessButton.addEventListener("click", () => {
+  setupCamera(); 
+});
 captureButton.addEventListener("click", () => {
   const fixedWidth = 360; // Fixed width
   const fixedHeight = (fixedWidth * 4) / 3; // Calculating height based on 3:4 ratio
