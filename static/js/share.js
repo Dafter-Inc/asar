@@ -12,11 +12,11 @@ const trimURL = (url) => {
   }
 };
 
-// Add click event listener to each button
+const message = "I pledge my support for a #CleanAirWithAsar! Do you? Pledge your support now - ";
+
 shareButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const url = trimURL(window.location.href);
-
     const platform = button.classList[1];
 
     let shareUrl;
@@ -27,12 +27,14 @@ shareButtons.forEach((button) => {
         )}`;
         break;
       case "twitter":
-        shareUrl = `https://twitter.com/share?url=${encodeURIComponent(url)}`;
+        shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+          message + url
+        )}`;
         break;
       case "linkedin":
-        shareUrl = `https://www.linkedin.com/shareArticle?url=${encodeURIComponent(
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
           url
-        )}`;
+        )}&text=${encodeURIComponent(message)}`;
         break;
       case "pinterest":
         shareUrl = `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(
@@ -44,7 +46,7 @@ shareButtons.forEach((button) => {
         break;
       case "whatsapp":
         shareUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(
-          url
+          message + url
         )}`;
         break;
     }
