@@ -151,7 +151,7 @@ small,
   transform: scaleX(-1);
   max-width: 100%;
   height: auto;
-  aspect-ratio: 9/16;
+  aspect-ratio: 3/4;
   object-fit: cover;
 }
 
@@ -159,7 +159,7 @@ small,
   position: relative;
   width: 100%;
   height: auto;
-  aspect-ratio: 9/16; 
+  aspect-ratio: 3/4; 
 }
 
 /* #video {

@@ -24,9 +24,9 @@ const cameraAccessButton = document.getElementById("camera-access-btn");
 const setupCamera = async () => {
   try {
     const stream = await navigator.mediaDevices.getUserMedia({ video: {
-      aspectRatio: 9 / 16,
+      aspectRatio: 3 / 4,
       width: { ideal: 360 }, // Set the ideal width to match the fixed width of the canvas
-      height: { ideal: 640 } // Set the ideal height based on 9:16 ratio
+      height: { ideal: 480 } // Set the ideal height based on 9:16 ratio
     } });
     video.srcObject = stream;
     cameraAccessButton.style.display = "none"; // Hide the button if access is allowed
@@ -45,7 +45,7 @@ if (video) {
 
 captureButton.addEventListener("click", () => {
   const fixedWidth = 360; // Fixed width
-  const fixedHeight = (fixedWidth * 16) / 9; // Calculating height based on 9:16 ratio
+  const fixedHeight = (fixedWidth * 4) / 3; // Calculating height based on 3:4 ratio
 
   canvas.width = fixedWidth;
   canvas.height = fixedHeight;
