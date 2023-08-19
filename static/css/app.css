@@ -6,9 +6,9 @@ html {
 
 body {
   font-family: "Biryani", sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
-  color: #1b1b1b;
+  color: #38b6ff;
 }
 
 p {
@@ -84,7 +84,7 @@ small,
 }
 
 .color-primary {
-  color: #1e91d0;
+  color: #0480c8;
 }
 
 .color-shiva-blue {
@@ -100,7 +100,7 @@ small,
 }
 
 .bg-primary {
-  background-color: #1e91d0;
+  background-color: #0480c8;
 }
 
 .bg-shiva-blue {
