@@ -29,11 +29,14 @@ const setupCamera = async () => {
       height: { ideal: 480 } // Set the ideal height based on 9:16 ratio
     } });
     video.srcObject = stream;
+    video.setAttribute('autoplay', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
     cameraAccessButton.style.display = "none"; // Hide the button if access is allowed
   } catch (error) {
     console.error("Error Setting Up Camera:", error);
     alert(
-      "There was an error setting up the camera. Please check your camera settings and try again."
+      "Please check your browser camera permissions and try again! Look for a Lock (🔒) symbol in your browser where your enter the URL, and check your permissions to allow camera access."
     );
     cameraAccessButton.style.display = "block"; // Show the button if access is blocked
   }
