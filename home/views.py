@@ -9,7 +9,7 @@ bp = Blueprint("home", __name__)
 @bp.route("/", methods=["GET"])
 def index():
     today = datetime.now().timestamp()
-    start_date = datetime(2023, 8, 29).timestamp()
+    start_date = datetime(2023, 9, 1).timestamp()
 
     approved_images = []
     approved_length = 0
