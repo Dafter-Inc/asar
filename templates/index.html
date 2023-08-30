@@ -35,7 +35,9 @@
     </a>
   </div>
 </div>
-
+<div class="container m-3 p-0 mx-auto">
+  <img src="{{ url_for('static', filename= 'img/sponsor.png') }}" alt="#TogetherForCleanAir Sponsors" width="100%"/>
+</div>
 <hr class="my-4 divider" />
 
 {% if length %}
@@ -56,8 +58,9 @@
 </div>
 {% endif %}
 
-<div class="container m-3 p-0 mx-auto">
+<!-- <div class="container m-3 p-0 mx-auto"> 
   <img src="{{ url_for('static', filename= 'img/sponsor.png') }}" alt="#TogetherForCleanAir Sponsors" width="100%"/>
 </div>
+-->
 
 {% endblock %}
