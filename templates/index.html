@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="col text-center mx-auto">
-  <img id="World Environment Day" src="{{ url_for('static', filename='img/hero.jpg') }}" alt="#CleanAirForBlueSkies by Asar" width="100%" />
+  <img id="World Environment Day" src="{{ url_for('static', filename='img/hero.jpg') }}" alt="#TogetherForCleanAir by Asar" width="100%" />
   <p class="p-2"><strong>This International Day of Clean Air for blue skies, learn more about air pollution, its impact on health and environment, and actions you can take.</strong></p>
   <p class="px-1 mb-4"><strong>Let's come <span class="color-primary">#TogetherForCleanAir!</span></strong></p>
   <p class="text-center m-4 px-1">Air pollution is India’s 2nd largest problem after malnutrition.<br>
@@ -55,4 +55,9 @@
   </div>
 </div>
 {% endif %}
+
+<div class="container-fluid m-3">
+  <img src="{{ url_for('static', filename= 'img/sponsor.png') }}" alt="#TogetherForCleanAir Sponsors" width="100%"/>
+</div>
+
 {% endblock %}
