@@ -50,7 +50,7 @@
     {% for image in images %}
       {% if image.approved %}
         <div class="col">
-          <img src="{{ image.image_url }}" alt="Image {{ image.id }}" class="img-fluid img-thumbnail mx-auto" id="display-img" />
+          <img src="{{ image.image_url | replace('upload/', 'upload/q_auto,f_auto/') }}" alt="Image {{ image.id }}" class="img-fluid img-thumbnail mx-auto" id="display-img" loading="lazy" />
         </div>
       {% endif %}
     {% endfor %}
